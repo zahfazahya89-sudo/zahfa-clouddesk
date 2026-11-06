@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zahfa CloudDesk - Personal productivity dashboard">
+  <title>Zahfa CloudDesk | Personal Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="Zahfa CloudDesk home">
+        <span class="brand-mark">Z</span><span>Zahfa<span class="brand-light">CloudDesk</span></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-menu" aria-label="Navigasi utama">
+        <button class="nav-link active" data-page="overview"><span class="nav-icon">▦</span> Overview</button>
+        <button class="nav-link" data-page="tasks"><span class="nav-icon">✓</span> My Tasks <span class="nav-count" id="navTaskCount">0</span></button>
+        <button class="nav-link" data-page="calendar"><span class="nav-icon">▣</span> Calendar</button>
+        <button class="nav-link" data-page="notes"><span class="nav-icon">▤</span> Notes</button>
+        <button class="nav-link" data-page="analytics"><span class="nav-icon">◫</span> Analytics</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="storage-card">
+          <div class="storage-top"><span>Workspace status</span><span class="online-dot"></span></div>
+          <strong>Ready to focus</strong>
+          <p>Your personal space is looking good.</p>
+          <div class="storage-bar"><span></span></div>
+          <small>Local workspace · Browser storage</small>
+        </div>
+        <button class="nav-link" data-page="profile"><span class="nav-icon">◎</span> My Profile</button>
+        <div class="sidebar-user">
+          <div class="avatar">MZ</div><div class="user-meta"><strong>Muhammad Zahfa Zahya</strong><small>Personal Workspace</small></div>
+          <span class="user-menu">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Buka menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbPage">Overview</strong></div>
+        <div class="top-actions">
+          <div class="date-chip"><span>◷</span><span id="topClock">--:--</span><span class="date-divider"></span><span id="topDate">--</span></div>
+          <button class="icon-button" id="themeToggle" aria-label="Ganti tema" title="Ganti tema">☼</button>
+          <div class="avatar top-avatar" title="Muhammad Zahfa Zahya">MZ</div>
+        </div>
+      </header>
+
+      <section class="page active-page" id="page-overview">
+        <div class="welcome-row">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> PERSONAL WORKSPACE</div>
+            <h1>Good day, Zahfa <span class="wave">✦</span></h1>
+            <p class="subheading">Here’s what’s happening in your workspace today.</p></div>
+          <button class="primary-button" id="quickAddTask">＋ Create new task</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-heading"><span>Total Tasks</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="totalTasks">0</div><div class="stat-foot"><span class="mini-dot blue-dot"></span> All tasks in your workspace</div></article>
+          <article class="stat-card"><div class="stat-heading"><span>Completed</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="completedTasks">0</div><div class="stat-foot"><span class="mini-dot green-dot"></span> Tasks finished</div></article>
+          <article class="stat-card"><div class="stat-heading"><span>In Progress</span><span class="stat-icon purple">◷</span></div><div class="stat-value" id="progressTasks">0</div><div class="stat-foot"><span class="mini-dot purple-dot"></span> Keep the momentum</div></article>
+          <article class="stat-card"><div class="stat-heading"><span>Productivity</span><span class="stat-icon orange">↗</span></div><div class="stat-value" id="productivity">0<small>%</small></div><div class="stat-foot"><span class="mini-dot orange-dot"></span> Completion rate</div></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel task-panel">
+            <div class="panel-heading"><div><h2>Recent Tasks</h2><p>Your latest work and priorities</p></div><button class="text-button" data-goto="tasks">View all →</button></div>
+            <div id="recentTaskList" class="task-list"></div>
+          </article>
+          <article class="panel progress-panel">
+            <div class="panel-heading"><div><h2>Task Progress</h2><p>Your productivity at a glance</p></div><span class="period-pill">All time</span></div>
+            <div class="donut-wrap"><div class="donut" id="donutChart"><div class="donut-center"><strong id="donutPercent">0%</strong><span>Completed</span></div></div></div>
+            <div class="legend"><span><i class="legend-dot done"></i> Completed <b id="legendDone">0</b></span><span><i class="legend-dot pending"></i> Remaining <b id="legendPending">0</b></span></div>
+          </article>
+        </div>
+        <div class="bottom-grid">
+          <article class="panel agenda-panel"><div class="panel-heading"><div><h2>Today’s Agenda</h2><p>A little plan goes a long way</p></div><span class="calendar-icon">▦</span></div><div id="agendaList" class="agenda-list"></div></article>
+          <article class="quote-card"><div class="quote-mark">“</div><p>Great things are done by a series of small things brought together.</p><span>— Vincent van Gogh</span><div class="quote-decoration">✳</div></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-tasks">
+        <div class="page-heading"><div><div class="eyebrow">STAY ORGANIZED</div><h1>My Tasks</h1><p class="subheading">Manage your work, one step at a time.</p></div><button class="primary-button" id="addTaskButton">＋ Add task</button></div>
+        <article class="panel full-panel"><div class="toolbar"><div class="search-box"><span>⌕</span><input id="taskSearch" type="search" placeholder="Search tasks..."></div><select id="taskFilter" aria-label="Filter tugas"><option value="all">All tasks</option><option value="active">Active</option><option value="completed">Completed</option></select></div><div id="allTaskList" class="task-list roomy"></div></article>
+      </section>
+
+      <section class="page" id="page-calendar">
+        <div class="page-heading"><div><div class="eyebrow">PLAN YOUR DAYS</div><h1>Calendar</h1><p class="subheading">A simple overview of your upcoming schedule.</p></div></div>
+        <article class="panel calendar-panel"><div class="calendar-header"><button class="icon-button" id="prevMonth">←</button><h2 id="monthLabel">Month Year</h2><button class="icon-button" id="nextMonth">→</button></div><div class="calendar-grid" id="calendarGrid"></div><div class="calendar-hint"><span class="mini-dot blue-dot"></span> Today</div></article>
+      </section>
+
+      <section class="page" id="page-notes">
+        <div class="page-heading"><div><div class="eyebrow">THINK IT. WRITE IT.</div><h1>Quick Notes</h1><p class="subheading">Keep important ideas close at hand.</p></div></div>
+        <article class="panel notes-panel"><div class="note-compose"><input id="noteTitle" type="text" placeholder="Note title"><textarea id="noteBody" rows="4" placeholder="Write something worth remembering..."></textarea><div class="note-actions"><span>Notes are saved in this browser.</span><button class="primary-button" id="saveNote">Save note</button></div></div><div class="notes-divider"></div><div id="notesList" class="notes-grid"></div></article>
+      </section>
+
+      <section class="page" id="page-analytics">
+        <div class="page-heading"><div><div class="eyebrow">MEASURE YOUR MOMENTUM</div><h1>Analytics</h1><p class="subheading">A clear snapshot of your task activity.</p></div></div>
+        <div class="stats-grid analytics-stats">
+          <article class="stat-card"><div class="stat-heading"><span>Tasks created</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="analyticsTotal">0</div><div class="stat-foot">Total items tracked</div></article>
+          <article class="stat-card"><div class="stat-heading"><span>Tasks completed</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="analyticsDone">0</div><div class="stat-foot">Finished items</div></article>
+          <article class="stat-card"><div class="stat-heading"><span>Completion rate</span><span class="stat-icon purple">↗</span></div><div class="stat-value" id="analyticsRate">0%</div><div class="stat-foot">Based on all tasks</div></article>
+        </div>
+        <article class="panel chart-panel"><div class="panel-heading"><div><h2>Workspace summary</h2><p>Task distribution by status</p></div></div><div class="bar-chart" id="barChart"></div></article>
+      </section>
+
+      <section class="page" id="page-profile">
+        <div class="page-heading"><div><div class="eyebrow">YOUR SPACE, YOUR PACE</div><h1>My Profile</h1><p class="subheading">Your personal workspace identity.</p></div></div>
+        <article class="panel profile-panel"><div class="profile-cover"></div><div class="profile-content"><div class="profile-avatar">MZ</div><div class="profile-name"><h2>Muhammad Zahfa Zahya</h2><p>Workspace Owner · Zahfa CloudDesk</p></div><div class="profile-details"><div><span>Workspace</span><strong>Personal Productivity</strong></div><div><span>Platform</span><strong>Web Dashboard</strong></div><div><span>Storage</span><strong>Browser Local Storage</strong></div><div><span>Account status</span><strong class="status-online">● Active</strong></div></div><p class="profile-note">Zahfa CloudDesk is a personal dashboard designed to help organize tasks, notes, schedules, and productivity in one simple workspace.</p></div></article>
+      </section>
+
+      <footer class="footer"><span>© <span id="year"></span> Zahfa CloudDesk</span><span>Designed for focus <b>✦</b></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="taskModal" aria-hidden="true">
+    <form class="modal" id="taskForm">
+      <div class="modal-heading"><div><div class="eyebrow">TASK MANAGER</div><h2 id="modalTitle">Create a task</h2></div><button type="button" class="icon-button" id="closeModal" aria-label="Tutup">×</button></div>
+      <label for="taskTitle">Task name</label><input id="taskTitle" type="text" placeholder="e.g. Finish cloud computing report" required maxlength="90">
+      <label for="taskCategory">Category</label><select id="taskCategory"><option>Study</option><option>Personal</option><option>Project</option><option>Other</option></select>
+      <label for="taskDue">Due date</label><input id="taskDue" type="date">
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button class="primary-button" type="submit">Save task</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
