@@ -1,6 +1,6 @@
 # Zahfa CloudDesk
 
-Personal Productivity & Cloud Dashboard untuk Muhammad Zahfa Zahya.
+Personal Productivity & Cloud Dashboard |By: Muhammad Zahfa Zahya.
 
 ## Menjalankan secara lokal
 1. Ekstrak folder `Zahfa-CloudDesk`.
